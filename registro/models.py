@@ -22,7 +22,7 @@ class Usuario(models.Model):
     telefono = CharField(max_length=255, null=True, blank=True)
     zona = CharField(max_length=255, null=True, blank=True)
     tipo = CharField(max_length=255, null=True, blank=True)
-    ip = GenericIPAddressField()
+    ip = GenericIPAddressField(unique=True)
     ip_int = BigIntegerField(default=0)
 
     def __str__(self):
