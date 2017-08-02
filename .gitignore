@@ -100,4 +100,3 @@ RegistroDeUsuarios/__pycache__/
 db.sqlite3
 registro/__pycache__/
 registro/migrations/__pycache__/
-templates/
