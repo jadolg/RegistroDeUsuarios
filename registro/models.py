@@ -14,14 +14,35 @@ def validate_MAC(value):
         raise ValidationError('Esta no es una dirección MAC válida')
 
 
+class Zona(models.Model):
+    zona = CharField(max_length=255)
+
+    def __str__(self):
+        return self.zona
+
+
+class Responsable(models.Model):
+    responsable = CharField(max_length=255)
+
+    def __str__(self):
+        return self.responsable
+
+
+class TipoDeEquipo(models.Model):
+    tipo = CharField(max_length=255)
+
+    def __str__(self):
+        return self.tipo
+
+
 class Usuario(models.Model):
     nombre = CharField(max_length=255, null=True, blank=True)
     mac = CharField(max_length=17, unique=True, validators=[validate_MAC, ], null=True, blank=True)
     fecha_registro = DateTimeField(null=True, blank=True)
-    responsable = CharField(max_length=255, null=True, blank=True)
+    responsable = models.ForeignKey(Responsable, null=True, blank=True)
     telefono = CharField(max_length=255, null=True, blank=True)
-    zona = CharField(max_length=255, null=True, blank=True)
-    tipo = CharField(max_length=255, null=True, blank=True)
+    zona = models.ForeignKey(Zona, null=True, blank=True)
+    tipo = models.ForeignKey(TipoDeEquipo, null=True, blank=True)
     ip = GenericIPAddressField(unique=True)
     ip_int = BigIntegerField(default=0)
 

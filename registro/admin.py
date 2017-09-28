@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib.auth.models import User, Group
-from registro.models import Usuario
+from registro.models import Usuario, Zona, Responsable, TipoDeEquipo
 
 
 class UsuarioAdmin(admin.ModelAdmin):
@@ -15,5 +15,8 @@ class UsuarioAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Usuario, UsuarioAdmin)
-admin.site.unregister(User)
+admin.site.register(Zona)
+admin.site.register(Responsable)
+admin.site.register(TipoDeEquipo)
+# admin.site.unregister(User)
 admin.site.unregister(Group)
