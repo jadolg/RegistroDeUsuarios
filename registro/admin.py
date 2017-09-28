@@ -6,12 +6,21 @@ from registro.models import Usuario, Zona, Responsable, TipoDeEquipo
 
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'ip', 'mac', 'fecha_registro', 'responsable', 'telefono', 'zona', 'tipo', )
-    search_fields = ('nombre', 'ip', 'mac', 'fecha_registro', 'responsable', 'telefono', 'zona', 'tipo', )
-    list_filter = ('responsable', 'zona', 'tipo')
-    ordering = ('ip_int', )
+    def responsable_equipo(self, obj):
+        if obj.responsable:
+            return '<a href="http://localhost:8000/admin/registro/responsable/' + str(obj.responsable.id) + '/change/">' \
+                   + obj.responsable.responsable + '</a>'
+        else:
+            return "-"
 
-    exclude = ('ip_int', )
+    responsable_equipo.allow_tags = True
+
+    list_display = ('nombre', 'ip', 'mac', 'fecha_registro', 'responsable_equipo', 'telefono', 'zona', 'tipo',)
+    search_fields = ('nombre', 'ip', 'mac', 'fecha_registro', 'responsable__responsable', 'telefono', 'zona__zona', 'tipo__tipo',)
+    list_filter = ('responsable', 'zona', 'tipo')
+    ordering = ('ip_int',)
+
+    exclude = ('ip_int',)
 
 
 admin.site.register(Usuario, UsuarioAdmin)

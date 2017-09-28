@@ -23,6 +23,7 @@ class Zona(models.Model):
 
 class Responsable(models.Model):
     responsable = CharField(max_length=255)
+    telefono = CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.responsable
